@@ -2,217 +2,364 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>John Kenneth R. Rili - Portfolio</title>
-  <meta name="description" content="Portfolio of John Kenneth R. Rili — AI & AR Developer, Web Project Manager, and UI/UX Enthusiast.">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>John Kenneth R. Rili – Portfolio</title>
+  <meta name="description" content="Portfolio of John Kenneth R. Rili – AI & AR developer, web projects, certifications, and contact." />
   <style>
+    /* ========== RESET & THEME ========== */
+    *, *::before, *::after { box-sizing: border-box; }
     :root {
-      --primary: #007BFF;
-      --bg-light: #f4f4f4;
-      --bg-dark: #121212;
-      --text-light: #333;
-      --text-dark: #fff;
+      --bg: #0a0b0d;
+      --panel: #121317;
+      --ink: #e6f1ff;
+      --muted: #9fb0c5;
+      --brand: #00f7ff; /* tech cyan */
+      --accent: #7afcff; /* subtle tints for glows */
+      --ring: #00f7ff55;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f7fafc; --panel:#fff; --ink:#0b1220; --muted:#445069; }
+      body { background: var(--bg); }
+    }
+    html, body { height: 100%; }
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: background 0.3s, color 0.3s;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 800px at 20% -10%, #0e24331a 0%, transparent 60%), var(--bg);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
-    body.dark-mode {
-      background: var(--bg-dark);
-      color: var(--text-dark);
-    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ========== LAYERS ========== */
+    .bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+
+    /* ========== HEADER / HERO ========== */
     header {
-      background: linear-gradient(135deg, var(--primary), #00d4ff);
-      color: white;
-      padding: 40px 20px;
+      position: relative;
+      padding: clamp(64px, 10vw, 120px) 24px 48px;
       text-align: center;
-      animation: fadeInDown 1s ease;
     }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px; margin-bottom: 14px;
+      border: 1px solid var(--ring); border-radius: 999px;
+      background: linear-gradient(180deg, #0c0f13, #0a0b0d);
+      box-shadow: 0 0 0 4px #00f7ff14;
+      backdrop-filter: blur(4px);
     }
-    header p {
-      font-size: 1.2rem;
-      height: 1.2rem;
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 16px var(--brand); }
+    h1 {
+      font-size: clamp(28px, 5.2vw, 56px);
+      letter-spacing: .5px; margin: 6px 0 8px;
+      text-shadow: 0 0 8px #00f7ff33;
+      animation: pulseGlow 3.2s ease-in-out infinite alternate;
     }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      background: white;
-      padding: 15px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    @keyframes pulseGlow {
+      from { text-shadow: 0 0 8px #00f7ff33, 0 0 0 #00f7ff00; }
+      to { text-shadow: 0 0 18px #00f7ff66, 0 0 36px #00f7ff22; }
     }
-    body.dark-mode nav {
-      background: #1e1e1e;
+    .subtitle { color: var(--muted); font-size: clamp(14px, 2.2vw, 18px); }
+
+    /* ========== SECTIONS ========== */
+    main { max-width: 1040px; margin: 0 auto; padding: 0 24px 80px; }
+    section { margin: 48px 0; }
+    .section-title {
+      display: inline-block; margin: 4px 0 16px; padding-left: 12px;
+      border-left: 3px solid var(--brand); color: var(--brand);
+      font-weight: 700; letter-spacing: .2px; text-transform: uppercase;
+      font-size: 14px;
     }
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+    .card {
+      background: linear-gradient(180deg, #11131a 0%, #0f1218 100%);
+      border: 1px solid #2d384a; border-radius: var(--radius);
+      padding: 20px 22px; box-shadow: var(--shadow);
+      outline: 0; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-    nav a:hover {
-      color: #0056b3;
+    .card:hover { transform: translateY(-4px); border-color: var(--ring); box-shadow: 0 8px 36px #00f7ff1f; }
+    .stack { display: grid; gap: 16px; }
+
+    /* ========== GRIDS ========== */
+    .grid-2 { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 840px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    ul { margin: 10px 0 0 18px; padding: 0; }
+    li { margin: 6px 0; color: var(--ink); }
+    .muted { color: var(--muted); }
+
+    /* ========== CONTACT BAR ========== */
+    .contact {
+      display: grid; gap: 10px; justify-items: center; text-align: center;
+      padding: 18px; border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(0,247,255,.06), rgba(0,247,255,.02));
+      border: 1px solid var(--ring);
     }
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+
+    /* ========== NAV (optional anchors) ========== */
+    .nav {
+      position: sticky; top: 0; z-index: 2;
+      display: flex; justify-content: center; gap: 18px; padding: 10px 16px; backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(10,11,13,.75), rgba(10,11,13,.35));
+      border-bottom: 1px solid #1e2836; box-shadow: 0 8px 24px rgba(0,0,0,.25);
     }
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      background: white;
-      margin: 10px 0;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    li:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-    body.dark-mode li {
-      background: #1e1e1e;
-    }
+    .nav a { padding: 8px 10px; border-radius: 8px; }
+    .nav a:hover { background: #0f141c; }
+
+    /* ========== FOOTER ========== */
     footer {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      text-align: center; color: var(--muted);
+      border-top: 1px solid #1c2230; padding: 28px 16px 60px;
     }
-    button {
-      background: white;
-      color: var(--primary);
-      border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.3s, color 0.3s;
+    .toggle {
+      margin-top: 10px; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; border: 1px solid #2b3648; border-radius: 999px; padding: 8px 12px;
+      background: #0e141c; cursor: pointer; user-select: none;
     }
-    button:hover {
-      background: var(--primary);
-      color: white;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; padding: 2px 6px; border: 1px solid #2b3648; border-radius: 6px; background:#0b0f15; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>John Kenneth R. Rili</h1>
-    <p id="typingText"></p>
-    <button id="toggleTheme">🌙 Dark Mode</button>
-  </header>
+  <!-- Particle Background -->
+  <canvas class="bg-canvas" id="bg"></canvas>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="content">
+    <div class="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certs">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Motivated and detail-oriented individual with hands-on experience in developing responsive applications, AI-powered solutions, and impactful projects.</p>
-  </section>
+    <header>
+      <div class="badge"><span class="dot"></span> Available for Interview</div>
+      <h1>John Kenneth R. Rili</h1>
+      <p class="subtitle">BS Information Technology — <strong>Magna Cum Laude</strong> · AI & AR · Web Projects · UI/UX</p>
+    </header>
 
-  <section id="experience">
-    <h2>Experience</h2>
-    <p>Technical Support Intern - City Government of Manila (Feb-May 2025)</p>
-  </section>
+    <main>
+      <section id="about">
+        <span class="section-title">About</span>
+        <div class="card stack">
+          <p>Motivated and detail-oriented with hands-on experience in building responsive applications and AI-powered solutions. From augmented reality apps to e‑commerce platforms, I care about clarity, performance, and user impact.</p>
+        </div>
+      </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li>LayOut Loud: AI-Powered AR Room Design</li>
-      <li>ITrack: Transportation Management System</li>
-      <li>Point of Sales System</li>
-    </ul>
-  </section>
+      <section id="skills">
+        <span class="section-title">Skills</span>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Core</h3>
+            <ul>
+              <li>Web Project Management</li>
+              <li>UI/UX Design</li>
+              <li>Critical Thinking & Adaptability</li>
+              <li>Collaboration & Leadership</li>
+              <li>Time & Organizational Management</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Tools</h3>
+            <ul>
+              <li>Visual Studio Code, Google Workspace, Microsoft Office</li>
+              <li>Canva</li>
+              <li>HTML, CSS, JavaScript, PHP, MySQL, Python</li>
+              <li>Bootstrap, Laravel</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>Web Project Management</li>
-      <li>UI/UX Design</li>
-      <li>Critical Thinking</li>
-      <li>Leadership</li>
-    </ul>
-  </section>
+      <section id="projects">
+        <span class="section-title">Projects</span>
+        <div class="stack">
+          <div class="card">
+            <h3>LayOut Loud — AI‑Powered AR App</h3>
+            <p class="muted">AI + AR furniture layout suggestions with real‑time visualization in actual spaces.</p>
+          </div>
+          <div class="card">
+            <h3>ITrack — Transportation Management (ARIMA)</h3>
+            <p class="muted">Route & demand forecasting using ARIMA; built with HTML, CSS, JS, PHP, MySQL, Python. Utilized Bootstrap & Laravel.</p>
+          </div>
+          <div class="card">
+            <h3>Point of Sales System — Ivan's Biscuits & Snacks</h3>
+            <p class="muted">Responsive store with product catalog, secure payment integration, and smooth checkout UX.</p>
+          </div>
+          <div class="card">
+            <h3>Likha — E‑commerce for School Supplies</h3>
+            <p class="muted">Responsive online store built with PHP, CSS, JavaScript to streamline purchasing.</p>
+          </div>
+        </div>
+      </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: johnkennethrili02@gmail.com</p>
-    <p>Phone: +63 961 507 8444</p>
-  </section>
+      <section id="certs">
+        <span class="section-title">Certifications & Recognition</span>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Awards</h3>
+            <ul>
+              <li>Best Presenter — 4th ICICyTA 2024 (Cybernetics & Information Management in Business)</li>
+              <li>Presented: “LayOut Loud: An AI‑Powered AR & Mobile App…” · Bali, Indonesia · Dec 2024</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Trainings</h3>
+            <ul>
+              <li>Weaponizing Social Engineering for Cyber Crimes — IIFIS</li>
+              <li>Azure Ignite: A Journey Through the Cloud and Data Space — PLM</li>
+              <li>Connected Classroom & Cybersecurity — Catalyst Learning</li>
+              <li>Agile & Scrum Methodologies — WVSU</li>
+              <li>Intro to Network & System Administration — Terra Hertz</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-  <footer>
-    &copy; 2025 John Kenneth R. Rili
-  </footer>
+      <section id="contact">
+        <span class="section-title">Contact</span>
+        <div class="contact">
+          <div>
+            <strong>Email:</strong> <a href="mailto:johnkennethrili02@gmail.com">johnkennethrili02@gmail.com</a>
+          </div>
+          <div>
+            <strong>Phone:</strong> +63 961 507 8444 · +63 991 415 9277
+          </div>
+          <div>
+            <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/johnkennethrili" target="_blank" rel="noopener">linkedin.com/in/johnkennethrili</a>
+          </div>
+          <div class="muted">Quezon City, Philippines</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2025 John Kenneth R. Rili</div>
+      <div class="toggle" id="motionToggle"><span>Reduce motion</span><span class="kbd">M</span></div>
+    </footer>
+  </div>
 
   <script>
-    // Typing effect
-    const typingText = document.getElementById('typingText');
-    const phrases = ['AI & AR Developer', 'Web Project Manager', 'UI/UX Enthusiast'];
-    let i = 0, j = 0, current = [], deleting = false;
-    (function loop(){
-      typingText.textContent = current.join('');
-      if (!deleting && j <= phrases[i].length) current.push(phrases[i][j++]);
-      if (deleting && j >= 0) current.pop(), j--;
-      if (j === phrases[i].length) { deleting = true; return setTimeout(loop, 1000); }
-      if (deleting && j === 0) { deleting = false; i = (i+1) % phrases.length; }
-      setTimeout(loop, deleting ? 50 : 100);
+    // ========== PARTICLE BACKGROUND (No external libraries) ==========
+    (function() {
+      const canvas = document.getElementById('bg');
+      const ctx = canvas.getContext('2d');
+      let width, height, particles = [], mouse = { x: null, y: null }, animation = true;
+
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function resize() {
+        width = canvas.width = Math.floor(innerWidth * DPR);
+        height = canvas.height = Math.floor(innerHeight * DPR);
+        canvas.style.width = innerWidth + 'px';
+        canvas.style.height = innerHeight + 'px';
+        init();
+      }
+
+      function init() {
+        const area = (width / DPR) * (height / DPR);
+        const density = prefersReduced.matches ? 0.00006 : 0.00012; // particles per px
+        const count = Math.max(40, Math.min(140, Math.floor(area * density)));
+        particles = Array.from({ length: count }, () => spawn());
+      }
+
+      function spawn() {
+        const speed = prefersReduced.matches ? 0.2 : 0.5 + Math.random() * 0.6;
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * speed,
+          vy: (Math.random() - 0.5) * speed,
+          r: (1 + Math.random() * 2) * DPR,
+        };
+      }
+
+      function draw() {
+        if (!animation) return;
+        ctx.clearRect(0, 0, width, height);
+
+        // draw links
+        const linkDist = 120 * DPR;
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx; p.y += p.vy;
+
+          // bounce
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          // mouse influence
+          if (mouse.x !== null) {
+            const dx = p.x - mouse.x, dy = p.y - mouse.y;
+            const d2 = dx*dx + dy*dy; const min = 110 * DPR;
+            if (d2 < min * min) {
+              const angle = Math.atan2(dy, dx);
+              p.vx += Math.cos(angle) * 0.02 * DPR;
+              p.vy += Math.sin(angle) * 0.02 * DPR;
+            }
+          }
+        }
+
+        // links + dots second pass for crisp layering
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const q = particles[j];
+            const dx = p.x - q.x, dy = p.y - q.y;
+            const d = Math.hypot(dx, dy);
+            if (d < linkDist) {
+              const alpha = 1 - d / linkDist;
+              ctx.strokeStyle = `rgba(0, 247, 255, ${alpha * 0.25})`;
+              ctx.lineWidth = DPR;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+            }
+          }
+          ctx.fillStyle = 'rgba(122, 252, 255, 0.8)';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      function onMouse(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = (e.clientX - rect.left) * DPR;
+        mouse.y = (e.clientY - rect.top) * DPR;
+      }
+      function onLeave() { mouse.x = mouse.y = null; }
+
+      // Motion toggle & accessibility
+      const toggle = document.getElementById('motionToggle');
+      function setMotion(on) {
+        animation = on && !prefersReduced.matches;
+        if (animation) requestAnimationFrame(draw);
+        toggle.firstElementChild.textContent = animation ? 'Reduce motion' : 'Enable motion';
+      }
+      toggle.addEventListener('click', () => setMotion(!animation));
+      document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'm') setMotion(!animation); });
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', onMouse);
+      window.addEventListener('mouseleave', onLeave);
+
+      // Init
+      resize();
+      if (prefersReduced.matches) setMotion(false); else requestAnimationFrame(draw);
     })();
 
-    // Dark mode toggle
-    document.getElementById('toggleTheme').addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      document.getElementById('toggleTheme').textContent =
-        document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
-    });
-
-    // Section reveal on scroll
-    const sections = document.querySelectorAll('section');
-    const revealSections = () => {
-      sections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          sec.classList.add('show');
-        }
+    // ========== Smooth anchor scrolling ==========
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
       });
-    };
-    window.addEventListener('scroll', revealSections);
-    revealSections();
+    });
   </script>
 </body>
 </html>
